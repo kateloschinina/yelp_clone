@@ -22,19 +22,17 @@ feature 'restaurants' do
 
   context 'creating restaurants' do
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
-    visit '/restaurants'
-    click_link 'Add a restaurant'
-    fill_in 'Name', with: 'KFC'
-    click_button 'Create Restaurant'
-    expect(page).to have_content 'KFC'
-    expect(current_path).to eq '/restaurants'
+      visit '/restaurants'
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'KFC'
+      click_button 'Create Restaurant'
+      expect(page).to have_content 'KFC'
+      expect(current_path).to eq '/restaurants'
     end
   end
 
   context 'viewing restaurants' do
-
     let!(:kfc){ Restaurant.create(name:'KFC') }
-
     scenario 'lets a user view a restaurant' do
       visit '/restaurants'
       click_link 'KFC'
@@ -44,7 +42,6 @@ feature 'restaurants' do
   end
 
   context 'editing restaurants' do
-
     before { Restaurant.create name: "KFC", description: 'deep fried goodness', id: 1 }
     scenario 'let a user edit a restaurant' do
       visit '/restaurants'
@@ -58,4 +55,15 @@ feature 'restaurants' do
       expect(current_path).to eq '/restaurants/1'
     end
   end
+
+  context 'deleting restaurants' do
+    before { Restaurant.create name: 'KFC', description: 'Deep fried goodness' }
+    scenario 'removes a restaurant when a user clicks delete link' do
+      visit '/restaurants'
+      click_link 'Delete KFC'
+      expect(page).not_to have_content 'KFC'
+      expect(page).to have_content 'Restaurant deleted successfully'
+    end
+  end
+
 end
