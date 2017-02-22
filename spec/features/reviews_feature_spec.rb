@@ -9,8 +9,7 @@ feature 'reviewing' do
      fill_in "Thought", with: "so so"
      select '3', from: 'Rating'
      click_button 'Leave Review'
-
-     expect(current_path).to eq '/restaurants/7/reviews'
+     click_link 'KFC'
      expect(page).to have_content('so so')
   end
 
