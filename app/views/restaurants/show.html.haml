@@ -4,8 +4,6 @@ Name:
 Description:
 = @restaurant.description
 %p
-Review:
-= @restaurant.reviews.first.thought if @restaurant.reviews.any?
+= ("Review: #{@restaurant.reviews.first.thought}") if @restaurant.reviews.any?
 %p
-Rating:
-= @restaurant.reviews.first.rating if @restaurant.reviews.any?
+= ("Rating: #{@restaurant.reviews.first.rating}") if @restaurant.reviews.any?

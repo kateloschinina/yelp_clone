@@ -6,6 +6,8 @@
 
 # Ignore bundler config.
 /.bundle
+/.env
+/.bash_profile
 
 # Ignore all logfiles and tempfiles.
 /log/*
