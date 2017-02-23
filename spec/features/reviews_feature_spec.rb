@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 feature 'reviewing' do
-  let!(:mcdonalds){ Restaurant.create(name:'McDonalds') }
+  # let!(:mcdonalds){ Restaurant.create(name:'McDonalds') }
 
   scenario 'allows users to leave a review using a form' do
     sign_up
-    visit '/restaurants'
+    @user.restaurants.create(name: 'McDonalds')
+    click_link 'Sign out'
+    sign_up_with_another_user
+    visit '/'
+    save_and_open_page
     click_link 'Review McDonalds'
     fill_in "Thought", with: "aight"
     select '3', from: 'Rating'
