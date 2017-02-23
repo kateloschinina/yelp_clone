@@ -1,5 +1,7 @@
 class RestaurantsController < ApplicationController
 
+  before_action :authenticate_user!, :except => [:index, :show]
+
   def index
     @restaurants = Restaurant.all
   end
@@ -9,7 +11,8 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    @user = current_user
+    @restaurant = @user.restaurants.new(restaurant_params)
     if @restaurant.save
       redirect_to restaurants_path
     else
@@ -22,7 +25,12 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
+    @user = current_user
     @restaurant = Restaurant.find(params[:id])
+    if @restaurant.user_id != @user.id
+      flash[:notice] = 'You are not permitted'
+      redirect_to '/restaurants'
+    end
   end
 
   def update
@@ -33,10 +41,15 @@ class RestaurantsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     @restaurant = Restaurant.find(params[:id])
-    @restaurant.destroy
-    flash[:notice] = 'Restaurant deleted successfully'
-    redirect_to '/restaurants'
+    if @restaurant.user_id == @user.id
+      @restaurant.destroy
+      flash[:notice] = 'Restaurant deleted successfully'
+    else
+      flash[:notice] = 'You are not permitted'
+    end
+    redirect_to'/restaurants'
   end
 
 

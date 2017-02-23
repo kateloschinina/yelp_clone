@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 feature 'reviewing' do
-  let!(:kfc){ Restaurant.create(name:'KFC') }
+  let!(:mcdonalds){ Restaurant.create(name:'McDonalds') }
 
   scenario 'allows users to leave a review using a form' do
-     visit '/restaurants'
-     click_link 'Review KFC'
-     fill_in "Thought", with: "so so"
-     select '3', from: 'Rating'
-     click_button 'Leave Review'
-     click_link 'KFC'
-     expect(page).to have_content('so so')
+    sign_up
+    visit '/restaurants'
+    click_link 'Review McDonalds'
+    fill_in "Thought", with: "aight"
+    select '3', from: 'Rating'
+    click_button 'Leave Review'
+    click_link 'McDonalds'
+    expect(page).to have_content('aight')
   end
 
 end

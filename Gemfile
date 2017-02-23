@@ -11,6 +11,7 @@ gem 'omniauth-facebook'
 gem 'haml'
 gem "haml-rails"
 gem "erb2haml"
+gem 'shoulda-matchers', '~> 3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
 # Use postgresql as the database for Active Record

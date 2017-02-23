@@ -7,8 +7,20 @@ describe Restaurant, type: :model do
     expect(restaurant).not_to be_valid
   end
   it "is not valid unless it has a unique name" do
-    Restaurant.create(name: "Moe's Tavern")
+    @user = User.create(email: 'test@example.com', password: 'testtest', password_confirmation: 'testtest')
+    @user.restaurants.create(name: "Moe's Tavern")
     restaurant = Restaurant.new(name: "Moe's Tavern")
     expect(restaurant).to have(1).error_on(:name)
   end
+  context "association" do
+    it "restaurant has one user" do
+      should belong_to(:user)
+    end
+    it "restaurant has many reviews" do
+      should have_many(:reviews)
+    end
+  end
 end
+
+
+ # can only edit restaurants they've created
