@@ -9,7 +9,6 @@ feature 'reviewing' do
     click_link 'Sign out'
     sign_up_with_another_user
     visit '/'
-    save_and_open_page
     click_link 'Review McDonalds'
     fill_in "Thought", with: "aight"
     select '3', from: 'Rating'
