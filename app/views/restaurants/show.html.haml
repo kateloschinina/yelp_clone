@@ -15,3 +15,6 @@ Description:
   %br
 - if (@restaurant.reviews.any?)
   Average Rating: #{star_rating(@restaurant.average_rating)}
+
+= form_for @restaurant, html: {multipart: true} do |f|
+  = f.file_field :image
