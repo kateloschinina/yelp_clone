@@ -8,8 +8,6 @@ Description:
 - @restaurant.reviews.each do |review|
   = ("Review: #{review.thought}") if @restaurant.reviews.any?
   = ("Rating: #{review.rating}") if @restaurant.reviews.any?
-  - @sum += review.rating
   %br
 - if (@restaurant.reviews.any?)
-  - @average = @sum / @restaurant.reviews.length
-  Average Rating: "#{@average}"
+  Average Rating: "#{@restaurant.average_rating}"
