@@ -19,7 +19,7 @@ feature 'reviewing' do
     sign_up_with_yet_another_user
     leave_review('Great', '5')
     click_link 'McDonalds'
-    expect(page).to have_content('Average Rating: "4"')
+    expect(page).to have_content('Average Rating: ★★★★☆')
   end
 
 end

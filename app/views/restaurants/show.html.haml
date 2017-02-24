@@ -6,8 +6,12 @@ Description:
 %p
 - @sum = 0
 - @restaurant.reviews.each do |review|
-  = ("Review: #{review.thought}") if @restaurant.reviews.any?
-  = ("Rating: #{review.rating}") if @restaurant.reviews.any?
+  %p= ("Review: #{review.thought}") if @restaurant.reviews.any?
+  %p= link_to 'Endorse Review'
+  %p= pluralize review.endorsements.length, "endorsement#{'s' if review.endorsements.count != 1}"
+  = "Rating: #{review.endorsements}"
+  %br
+  %p= ("Rating: #{review.rating}") if @restaurant.reviews.any?
   %br
 - if (@restaurant.reviews.any?)
-  Average Rating: "#{@restaurant.average_rating}"
+  Average Rating: #{star_rating(@restaurant.average_rating)}
