@@ -7,9 +7,11 @@ Description:
 - @sum = 0
 - @restaurant.reviews.each do |review|
   %p= ("Review: #{review.thought}") if @restaurant.reviews.any?
-  %p= link_to 'Endorse Review'
+  = form_for [review, Endorsement.new] do |f|
+    = f.submit 'Endorse Review'
+  -# %p= link_to 'Endorse Review'
   %p= pluralize review.endorsements.length, "endorsement#{'s' if review.endorsements.count != 1}"
-  = "Rating: #{review.endorsements}"
+  = ": #{review.endorsements.inspect}"
   %br
   %p= ("Rating: #{review.rating}") if @restaurant.reviews.any?
   %br

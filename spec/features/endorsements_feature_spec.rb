@@ -12,7 +12,7 @@ feature 'endorsing reviews' do
     # save_and_open_page
     click_link 'The KFC'
     click_link 'Endorse Review' #are we endorsing restaurants or the review of the restaurants?
-    expect(page).to have_content('0 endorsements') #wrong change later on
+    expect(page).to have_content('1 endorsement') #wrong change later on
   end
 
 end
